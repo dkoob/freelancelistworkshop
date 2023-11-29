@@ -44,24 +44,25 @@ function render(){
     const html = freelancers.map((freelancer) => {
         return `<p>${freelancer.name} | ${freelancer.occupation} | $${freelancer.price}</p>`
     })
-    let total = 0
     container.innerHTML = html.join("")
+    
     // average price
+    let total = 0
     freelancers.forEach((freelancer) =>{
         total+=freelancer.price;
     })
     const averagePrice = document.querySelector(".averagePrice")
     const averagePriceNum = total/freelancers.length
-    const rounded = averagePriceNum.toFixed(2)
+    const rounded = averagePriceNum.toFixed(2) // rounds to 2 decimal places
     averagePrice.innerHTML = (`The average price of a freelancer right now is $${rounded}`)
 }
 
-render()
+render() // could do this another way, just called by itself to have 2 freelancers pop up by default
 const interval = setInterval(() => {
     const lancer = getFreelancer()
     freelancers.push(lancer)
     render()
-    if (freelancers.length === 25){
+    if (freelancers.length === 2500){
         clearInterval(interval)
     }
-},1500)
+},5)
